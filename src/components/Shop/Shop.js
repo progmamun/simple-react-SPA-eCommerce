@@ -15,7 +15,7 @@ const Shop = () => {
   }, []);
 
   useEffect(() => {
-    console.log('Local Storage first line', products);
+    // console.log('Local Storage first line', products);
     const storedCart = getStoredCart();
     const savedCart = [];
     console.log(storedCart);
@@ -32,7 +32,7 @@ const Shop = () => {
   }, [products]);
 
   const handleAddToCart = product => {
-    console.log(product);
+    // console.log(product);
     // cart.push(product);
     const newCart = [...cart, product];
     setCart(newCart);
