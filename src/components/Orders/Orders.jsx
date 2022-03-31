@@ -5,10 +5,11 @@ import useProducts from '../../hooks/useProducts';
 import { removeFromDb } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
+import './Orders.css';
 
 const Orders = () => {
   const [products, setProducts] = useProducts();
-  const [cart, setCart] = useCart();
+  const [cart, setCart] = useCart(products);
 
   const handleRemoveProduct = product => {
     const rest = cart.filter(pd => pd.id !== product.id);
@@ -18,7 +19,7 @@ const Orders = () => {
   return (
     <div>
       <div className="shop-container">
-        <div className="products-container">
+        <div className="review-items-container">
           {cart.map(product => (
             <ReviewItem
               key={product.id}
@@ -29,7 +30,7 @@ const Orders = () => {
         </div>
         <div className="cart-container">
           <Cart cart={cart}>
-            <Link>
+            <Link to="/inventory">
               <button>Proceed Checkout</button>
             </Link>
           </Cart>
