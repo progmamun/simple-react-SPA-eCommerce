@@ -95,10 +95,10 @@ const SignUp = () => {
             Login
           </Link>
         </p>
-        <div className="form-hr">
-          <hr />
-          <p>or</p>
-          <hr />
+        <div className="hr-container">
+          <hr className="hr-1" />
+          <span>or</span>
+          <hr className="hr-2" />
         </div>
       </div>
     </div>

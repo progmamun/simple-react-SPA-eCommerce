@@ -48,6 +48,14 @@
   color: #ff9900;
   text-decoration: none;
 }
-.form-hr {
+.hr-container {
   display: flex;
+}
+.hr-1 {
+  border-top: 1px solid rgb(255, 153, 0);
+  width: 45%;
+}
+.hr-2 {
+  border-top: 1px solid rgb(255, 153, 0);
+  width: 45%;
 }
