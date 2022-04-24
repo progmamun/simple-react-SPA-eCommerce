@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
+import useCart from '../../hooks/useCart';
 import './Shop.css';
 
 const Shop = () => {
-  const [products, setProducts] = useState();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useCart();
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/product?page=${page}$size=${size}`)
@@ -27,23 +28,6 @@ const Shop = () => {
         setPageCount(pages);
       });
   }, []);
-
-  useEffect(() => {
-    // console.log('Local Storage first line', products);
-    const storedCart = getStoredCart();
-    const savedCart = [];
-    console.log(storedCart);
-    for (const id in storedCart) {
-      const addedProduct = products.find(product => product._id === id);
-      if (addedProduct) {
-        const quantity = storedCart[id];
-        addedProduct.quantity = quantity;
-        savedCart.push(addedProduct);
-        // console.log(addedProduct);
-      }
-    }
-    setCart(savedCart);
-  }, [products]);
 
   const handleAddToCart = selectedProduct => {
     // console.log(selectedProduct);
@@ -82,7 +66,7 @@ const Shop = () => {
               {number + 1}
             </button>
           ))}
-          {size}
+          {/* {size} */}
           <select onChange={e => setSize(e.target.value)} name="" id="">
             <option value="5">5</option>
             <option value="10" selected>
