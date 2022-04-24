@@ -25,6 +25,7 @@ async function run() {
       const query = {};
       const cursor = productCollection.find(query);
       const products = await cursor.toArray();
+      // const products = await cursor.limit(10).toArray();
       res.send(products);
     });
   } finally {
