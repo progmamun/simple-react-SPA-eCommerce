@@ -22,6 +22,7 @@ async function run() {
     const productCollection = client.db('emaJhon').collection('product');
 
     app.get('/product', async (req, res) => {
+      console.log('query', req.query);
       const page = parseInt(req.query.page);
       const size = parseInt(req.query.size);
 
@@ -29,10 +30,10 @@ async function run() {
       const cursor = productCollection.find(query);
       let products;
       if (page || size) {
-        products = await cursor
-          .skip(page * size)
-          .limit(size)
-          .toArray();
+        // 0 --> skip: 0 get: 0-10(10):
+        // 1 --> skip: 1*10 get: 11-20(10):
+        // 2 --> skip: 2*10 get: 21-30 (10):
+        // 3 --> skip: 3*10 get: 21-30 (10):
         products = await cursor
           .skip(page * size)
           .limit(size)
@@ -41,7 +42,6 @@ async function run() {
         products = await cursor.toArray();
       }
 
-      // const products = await cursor.limit(10).toArray();
       res.send(products);
     });
 
@@ -57,18 +57,18 @@ async function run() {
       const query = { _id: { $in: ids } };
       const cursor = productCollection.find(query);
       const products = await cursor.toArray();
+      console.log(keys);
       res.send(products);
     });
   } finally {
   }
 }
-
 run().catch(console.dir);
 
 app.get('/', (req, res) => {
-  res.send('John is running');
+  res.send('John is running and waiting for Ema');
 });
 
 app.listen(port, () => {
-  console.log('John is running on port', port);
+  console.log('John is running on  port', port);
 });

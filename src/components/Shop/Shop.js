@@ -14,7 +14,7 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product?page=${page}$size=${size}`)
+    fetch(`http://localhost:5000/product?page=${page}&size=${size}`)
       .then(res => res.json())
       .then(data => setProducts(data));
   }, [page, size]);
@@ -30,8 +30,7 @@ const Shop = () => {
   }, []);
 
   const handleAddToCart = selectedProduct => {
-    // console.log(selectedProduct);
-    // cart.push(selectedProduct);
+    console.log(selectedProduct);
     let newCart = [];
     const exists = cart.find(product => product._id === selectedProduct._id);
     if (!exists) {
@@ -42,6 +41,7 @@ const Shop = () => {
       exists.quantity = exists.quantity + 1;
       newCart = [...rest, exists];
     }
+
     setCart(newCart);
     addToDb(selectedProduct._id);
   };
@@ -56,7 +56,6 @@ const Shop = () => {
             handleAddToCart={handleAddToCart}
           ></Product>
         ))}
-
         <div className="pagination">
           {[...Array(pageCount).keys()].map(number => (
             <button
@@ -66,8 +65,8 @@ const Shop = () => {
               {number + 1}
             </button>
           ))}
-          {/* {size} */}
-          <select onChange={e => setSize(e.target.value)} name="" id="">
+
+          <select onChange={e => setSize(e.target.value)}>
             <option value="5">5</option>
             <option value="10" selected>
               10
@@ -80,7 +79,7 @@ const Shop = () => {
       <div className="cart-container">
         <Cart cart={cart}>
           <Link to="/orders">
-            <button>Review Order</button>
+            <button>Review Order </button>
           </Link>
         </Cart>
       </div>

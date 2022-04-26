@@ -2,10 +2,11 @@
   display: grid;
   grid-template-columns: 4fr 1fr;
   background-color: #dfe6e965;
+  align-items: stretch;
 }
 .products-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 42px;
   margin: 100px 50px;
 }
