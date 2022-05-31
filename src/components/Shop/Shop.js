@@ -14,13 +14,15 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product?page=${page}&size=${size}`)
+    fetch(
+      `https://react-spa-ecommerce-app.herokuapp.com/product?page=${page}&size=${size}`
+    )
       .then(res => res.json())
       .then(data => setProducts(data));
   }, [page, size]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/productCount')
+    fetch('https://react-spa-ecommerce-app.herokuapp.com/productCount')
       .then(res => res.json())
       .then(data => {
         const count = data.count;

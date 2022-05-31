@@ -9,7 +9,7 @@ const useCart = products => {
     const savedCart = [];
     const keys = Object.keys(storedCart);
 
-    fetch('http://localhost:5000/productByKeys', {
+    fetch('https://react-spa-ecommerce-app.herokuapp.com/productByKeys', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
